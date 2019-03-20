@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxb.example.dao.ContractInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lxb.example.model.ContractInfo">
+        <id column="ServiceId" property="serviceid" jdbcType="BIGINT"/>
+        <result column="ServiceName" property="servicename" jdbcType="NVARCHAR"/>
+        <result column="ContractId" property="contractid" jdbcType="BIGINT"/>
+        <result column="Quantity" property="quantity" jdbcType="INTEGER"/>
+        <result column="ServiceCycles" property="servicecycles" jdbcType="INTEGER"/>
+        <result column="Status" property="status" jdbcType="TINYINT"/>
+        <result column="StartDate" property="startdate" jdbcType="TIMESTAMP"/>
+        <result column="EndDate" property="enddate" jdbcType="TIMESTAMP"/>
+        <result column="Amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="UseAmount" property="useamount" jdbcType="DECIMAL"/>
+        <result column="CurrentAmount" property="currentamount" jdbcType="DECIMAL"/>
+        <result column="CreditAmount" property="creditamount" jdbcType="DECIMAL"/>
+        <result column="CompensationAmount" property="compensationamount" jdbcType="DECIMAL"/>
+        <result column="IsUpdate" property="isupdate" jdbcType="BIT"/>
+        <result column="CMPServiceID" property="cmpserviceid" jdbcType="BIGINT"/>
+        <result column="CreatedOn" property="createdon" jdbcType="TIMESTAMP"/>
+        <result column="ModifiedOn" property="modifiedon" jdbcType="TIMESTAMP"/>
+        <result column="HadSendEmail" property="hadsendemail" jdbcType="BIT"/>
+        <result column="ServiceType" property="servicetype" jdbcType="CHAR"/>
+        <result column="ServiceReason" property="servicereason" jdbcType="NVARCHAR"/>
+        <result column="ParentServiceId" property="parentserviceid" jdbcType="BIGINT"/>
+        <result column="OriginalServiceName" property="originalservicename" jdbcType="NVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ServiceId, ServiceName, ContractId, Quantity, ServiceCycles, Status, StartDate, EndDate, 
+    Amount, UseAmount, CurrentAmount, CreditAmount, CompensationAmount, IsUpdate, CMPServiceID, 
+    CreatedOn, ModifiedOn, HadSendEmail, ServiceType, ServiceReason, ParentServiceId, 
+    OriginalServiceName
+  </sql>
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ContractInfo
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ContractInfo
+        where ServiceId = #{serviceid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ContractInfo
+    where ServiceId = #{serviceid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lxb.example.model.ContractInfo">
+    insert into ContractInfo (ServiceId, ServiceName, ContractId, 
+      Quantity, ServiceCycles, Status, 
+      StartDate, EndDate, Amount, 
+      UseAmount, CurrentAmount, CreditAmount, 
+      CompensationAmount, IsUpdate, CMPServiceID, 
+      CreatedOn, ModifiedOn, HadSendEmail, 
+      ServiceType, ServiceReason, ParentServiceId, 
+      OriginalServiceName)
+    values (#{serviceid,jdbcType=BIGINT}, #{servicename,jdbcType=NVARCHAR}, #{contractid,jdbcType=BIGINT}, 
+      #{quantity,jdbcType=INTEGER}, #{servicecycles,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, #{amount,jdbcType=DECIMAL}, 
+      #{useamount,jdbcType=DECIMAL}, #{currentamount,jdbcType=DECIMAL}, #{creditamount,jdbcType=DECIMAL}, 
+      #{compensationamount,jdbcType=DECIMAL}, #{isupdate,jdbcType=BIT}, #{cmpserviceid,jdbcType=BIGINT}, 
+      #{createdon,jdbcType=TIMESTAMP}, #{modifiedon,jdbcType=TIMESTAMP}, #{hadsendemail,jdbcType=BIT}, 
+      #{servicetype,jdbcType=CHAR}, #{servicereason,jdbcType=NVARCHAR}, #{parentserviceid,jdbcType=BIGINT}, 
+      #{originalservicename,jdbcType=NVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lxb.example.model.ContractInfo">
+        insert into ContractInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serviceid != null">
+                ServiceId,
+            </if>
+            <if test="servicename != null">
+                ServiceName,
+            </if>
+            <if test="contractid != null">
+                ContractId,
+            </if>
+            <if test="quantity != null">
+                Quantity,
+            </if>
+            <if test="servicecycles != null">
+                ServiceCycles,
+            </if>
+            <if test="status != null">
+                Status,
+            </if>
+            <if test="startdate != null">
+                StartDate,
+            </if>
+            <if test="enddate != null">
+                EndDate,
+            </if>
+            <if test="amount != null">
+                Amount,
+            </if>
+            <if test="useamount != null">
+                UseAmount,
+            </if>
+            <if test="currentamount != null">
+                CurrentAmount,
+            </if>
+            <if test="creditamount != null">
+                CreditAmount,
+            </if>
+            <if test="compensationamount != null">
+                CompensationAmount,
+            </if>
+            <if test="isupdate != null">
+                IsUpdate,
+            </if>
+            <if test="cmpserviceid != null">
+                CMPServiceID,
+            </if>
+            <if test="createdon != null">
+                CreatedOn,
+            </if>
+            <if test="modifiedon != null">
+                ModifiedOn,
+            </if>
+            <if test="hadsendemail != null">
+                HadSendEmail,
+            </if>
+            <if test="servicetype != null">
+                ServiceType,
+            </if>
+            <if test="servicereason != null">
+                ServiceReason,
+            </if>
+            <if test="parentserviceid != null">
+                ParentServiceId,
+            </if>
+            <if test="originalservicename != null">
+                OriginalServiceName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="serviceid != null">
+                #{serviceid,jdbcType=BIGINT},
+            </if>
+            <if test="servicename != null">
+                #{servicename,jdbcType=NVARCHAR},
+            </if>
+            <if test="contractid != null">
+                #{contractid,jdbcType=BIGINT},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="servicecycles != null">
+                #{servicecycles,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="startdate != null">
+                #{startdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enddate != null">
+                #{enddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="useamount != null">
+                #{useamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentamount != null">
+                #{currentamount,jdbcType=DECIMAL},
+            </if>
+            <if test="creditamount != null">
+                #{creditamount,jdbcType=DECIMAL},
+            </if>
+            <if test="compensationamount != null">
+                #{compensationamount,jdbcType=DECIMAL},
+            </if>
+            <if test="isupdate != null">
+                #{isupdate,jdbcType=BIT},
+            </if>
+            <if test="cmpserviceid != null">
+                #{cmpserviceid,jdbcType=BIGINT},
+            </if>
+            <if test="createdon != null">
+                #{createdon,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedon != null">
+                #{modifiedon,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hadsendemail != null">
+                #{hadsendemail,jdbcType=BIT},
+            </if>
+            <if test="servicetype != null">
+                #{servicetype,jdbcType=CHAR},
+            </if>
+            <if test="servicereason != null">
+                #{servicereason,jdbcType=NVARCHAR},
+            </if>
+            <if test="parentserviceid != null">
+                #{parentserviceid,jdbcType=BIGINT},
+            </if>
+            <if test="originalservicename != null">
+                #{originalservicename,jdbcType=NVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lxb.example.model.ContractInfo">
+        update ContractInfo
+        <set>
+            <if test="servicename != null">
+                ServiceName = #{servicename,jdbcType=NVARCHAR},
+            </if>
+            <if test="contractid != null">
+                ContractId = #{contractid,jdbcType=BIGINT},
+            </if>
+            <if test="quantity != null">
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="servicecycles != null">
+                ServiceCycles = #{servicecycles,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                Status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="startdate != null">
+                StartDate = #{startdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enddate != null">
+                EndDate = #{enddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amount != null">
+                Amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="useamount != null">
+                UseAmount = #{useamount,jdbcType=DECIMAL},
+            </if>
+            <if test="currentamount != null">
+                CurrentAmount = #{currentamount,jdbcType=DECIMAL},
+            </if>
+            <if test="creditamount != null">
+                CreditAmount = #{creditamount,jdbcType=DECIMAL},
+            </if>
+            <if test="compensationamount != null">
+                CompensationAmount = #{compensationamount,jdbcType=DECIMAL},
+            </if>
+            <if test="isupdate != null">
+                IsUpdate = #{isupdate,jdbcType=BIT},
+            </if>
+            <if test="cmpserviceid != null">
+                CMPServiceID = #{cmpserviceid,jdbcType=BIGINT},
+            </if>
+            <if test="createdon != null">
+                CreatedOn = #{createdon,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifiedon != null">
+                ModifiedOn = #{modifiedon,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hadsendemail != null">
+                HadSendEmail = #{hadsendemail,jdbcType=BIT},
+            </if>
+            <if test="servicetype != null">
+                ServiceType = #{servicetype,jdbcType=CHAR},
+            </if>
+            <if test="servicereason != null">
+                ServiceReason = #{servicereason,jdbcType=NVARCHAR},
+            </if>
+            <if test="parentserviceid != null">
+                ParentServiceId = #{parentserviceid,jdbcType=BIGINT},
+            </if>
+            <if test="originalservicename != null">
+                OriginalServiceName = #{originalservicename,jdbcType=NVARCHAR},
+            </if>
+        </set>
+        where ServiceId = #{serviceid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lxb.example.model.ContractInfo">
+    update ContractInfo
+    set ServiceName = #{servicename,jdbcType=NVARCHAR},
+      ContractId = #{contractid,jdbcType=BIGINT},
+      Quantity = #{quantity,jdbcType=INTEGER},
+      ServiceCycles = #{servicecycles,jdbcType=INTEGER},
+      Status = #{status,jdbcType=TINYINT},
+      StartDate = #{startdate,jdbcType=TIMESTAMP},
+      EndDate = #{enddate,jdbcType=TIMESTAMP},
+      Amount = #{amount,jdbcType=DECIMAL},
+      UseAmount = #{useamount,jdbcType=DECIMAL},
+      CurrentAmount = #{currentamount,jdbcType=DECIMAL},
+      CreditAmount = #{creditamount,jdbcType=DECIMAL},
+      CompensationAmount = #{compensationamount,jdbcType=DECIMAL},
+      IsUpdate = #{isupdate,jdbcType=BIT},
+      CMPServiceID = #{cmpserviceid,jdbcType=BIGINT},
+      CreatedOn = #{createdon,jdbcType=TIMESTAMP},
+      ModifiedOn = #{modifiedon,jdbcType=TIMESTAMP},
+      HadSendEmail = #{hadsendemail,jdbcType=BIT},
+      ServiceType = #{servicetype,jdbcType=CHAR},
+      ServiceReason = #{servicereason,jdbcType=NVARCHAR},
+      ParentServiceId = #{parentserviceid,jdbcType=BIGINT},
+      OriginalServiceName = #{originalservicename,jdbcType=NVARCHAR}
+    where ServiceId = #{serviceid,jdbcType=BIGINT}
+  </update>
+</mapper>
