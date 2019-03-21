@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -78,6 +79,24 @@ public class RedisServiceImpl implements RedisService {
         return result;
     }
 
+    /**
+     * 写入缓存
+     * @param key
+     * @param value
+     * @return boolean
+     */
+    @Override
+    public boolean setIfAbsent(String key, Object value, Duration expiretime) {
+        boolean result = false;
+        try {
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            operations.setIfAbsent(key,value,expiretime);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     /**
      * 批量删除对应的value
      * @param keys

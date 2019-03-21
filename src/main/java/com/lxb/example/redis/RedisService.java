@@ -1,5 +1,6 @@
 package com.lxb.example.redis;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,8 @@ public interface RedisService {
     boolean set(String key, Object value, Long expireTime);
 
     boolean setIfAbsent(String key, Object value);
+
+    boolean setIfAbsent(String key, Object value, Duration expiretime);
 
     void remove(String... keys);
 
