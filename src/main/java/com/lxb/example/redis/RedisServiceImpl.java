@@ -60,6 +60,25 @@ public class RedisServiceImpl implements RedisService {
     }
 
     /**
+     * 写入缓存
+     * @param key
+     * @param value
+     * @return boolean
+     */
+    @Override
+    public boolean setIfAbsent(String key, Object value) {
+        boolean result = false;
+        try {
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            operations.setIfAbsent(key, value);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
      * 批量删除对应的value
      * @param keys
      */

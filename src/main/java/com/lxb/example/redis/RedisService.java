@@ -9,6 +9,8 @@ public interface RedisService {
 
     boolean set(String key, Object value, Long expireTime);
 
+    boolean setIfAbsent(String key, Object value);
+
     void remove(String... keys);
 
     /**
