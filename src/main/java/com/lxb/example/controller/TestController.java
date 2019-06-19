@@ -49,4 +49,9 @@ public class TestController {
         return redislist;
     }
 
+    @RequestMapping("lock")
+    public void Lock(){
+        new ThreadTest(redisService).start();
+        new ThreadTest(redisService).start();
+    }
 }
